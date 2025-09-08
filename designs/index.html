@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design Gallery | Fasting</title>
+  <meta name="description" content="複数のデザイン候補を一覧で確認" />
+  <style>
+    :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#22d3ee; }
+    html,body{height:100%}
+    body{margin:0;background:radial-gradient(70% 50% at 15% 15%, rgba(34,211,238,.15), transparent 50%),
+      radial-gradient(60% 50% at 85% 10%, rgba(34,197,94,.12), transparent 55%), var(--bg);color:var(--text);
+      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, Helvetica, Arial, sans-serif;}
+    .container{max-width:1100px;margin:0 auto;padding:32px 20px}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+    h1{font-size:20px;margin:0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .meta{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-top:1px solid rgba(255,255,255,.08)}
+    .meta h2{font-size:15px;margin:0}
+    .meta a{color:var(--accent);text-decoration:none;font-weight:600}
+    .frame{width:100%;aspect-ratio:16/10;border:0;background:#0b1220}
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+  </style>
+  <link rel="icon" href="../assets/icons/favicon.ico" />
+  <meta property="og:title" content="Design Gallery | Fasting" />
+  <meta property="og:description" content="複数のデザイン候補を一覧で確認" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="../assets/og/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <base target="_blank" />
+  <script>
+    const designs = [
+      { id: 'natural',          name: 'Calm Natural',      path: './natural/index.html' },
+      { id: 'dark',             name: 'Bold Dark',         path: './dark/index.html' },
+      { id: 'editorial',        name: 'Editorial',         path: './editorial/index.html' },
+      { id: 'fresh-pastel',     name: 'Fresh Pastel',      path: './fresh-pastel/index.html' },
+      { id: 'japanese-minimal', name: 'Japanese Minimal',  path: './japanese-minimal/index.html' },
+      { id: 'gradient-splash',  name: 'Gradient Splash',   path: './gradient-splash/index.html' },
+      { id: 'card-magazine',    name: 'Card Magazine',     path: './card-magazine/index.html' },
+      { id: 'wellness-spa',     name: 'Wellness Spa',      path: './wellness-spa/index.html' },
+      { id: 'tech-sleek',       name: 'Tech Sleek',        path: './tech-sleek/index.html' },
+      { id: 'monochrome-zen',   name: 'Monochrome Zen',    path: './monochrome-zen/index.html' }
+    ];
+    window.addEventListener('DOMContentLoaded', ()=>{
+      const grid = document.querySelector('.grid');
+      designs.forEach(d => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <iframe class="frame" src="${d.path}"></iframe>
+          <div class="meta">
+            <h2>${d.name}</h2>
+            <a href="${d.path}">Open</a>
+          </div>`;
+        grid.appendChild(card);
+      });
+    });
+  </script>
+  </head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Design Gallery</h1>
+      <a href="../index.html" style="color:#93c5fd;text-decoration:none">現行サイトを見る →</a>
+    </header>
+    <section class="grid"></section>
+    <footer>新しいデザインを追加するには、フォルダを作り index.html を置いてこのページの配列に追加してください。</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+:root{--ink:#111;--muted:#666;--line:#e5e5e5;--bg:#fff}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.8 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, Arial, sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:20px}
+.bar{border-bottom:1px solid var(--line)}
+.brand{text-decoration:none;color:#111;font-weight:900;letter-spacing:.12em}
+nav a{color:#444;text-decoration:none;margin-left:16px}
+.lead{padding:30px 0}
+h1{font-size:42px;line-height:1.15;margin:.2em 0}
+.columns{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}
+.steps{border-bottom:1px solid var(--line)}
+ol{margin:0;padding:18px 20px 20px 34px}
+.cta{border-bottom:1px solid var(--line)}
+.inline{display:grid;grid-template-columns:1fr 1fr auto;gap:10px}
+input,button{font:inherit;border:1px solid #ccc;border-radius:8px;padding:10px 12px}
+button{background:#111;color:#fff}
+.foot{color:#666;border-top:1px solid var(--line)}
+@media(max-width:900px){.columns{grid-template-columns:1fr}.inline{grid-template-columns:1fr}}
+

@@ -1,0 +1,21 @@
+:root{--ink:#0b0b0b;--muted:#596168;--line:#e6e6e6;--bg:#fcfcfb;--accent:#223a70;--wash:#f1f5f9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.9 'Yu Mincho', 'Hiragino Mincho ProN', ui-serif, serif}
+.wrap{max-width:920px;margin:0 auto;padding:18px}
+.bar{border-bottom:1px solid var(--line);background:#fff}
+.mark{letter-spacing:.15em;text-decoration:none;color:var(--ink)}
+.nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+.visual{padding:34px 0;background:linear-gradient(180deg,#ffffff, var(--wash))}
+h1{font-weight:600;letter-spacing:.08em}
+.section{padding:28px 0;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.photo{margin:10px 0 24px;text-align:center;color:#8a8f96}
+.photo img{width:100%;display:block}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.apply{border-top:1px solid var(--line);background:#fff}
+.inline{display:grid;grid-template-columns:1fr 1fr auto;gap:10px}
+input,button{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:10px}
+button{background:var(--accent);color:#fff}
+.foot{border-top:1px solid var(--line);color:#8a8f96}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.columns{grid-template-columns:1fr}.inline{grid-template-columns:1fr}}
+
