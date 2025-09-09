@@ -29,6 +29,53 @@ a { color: inherit; text-decoration: none; }
 .lead { color: var(--muted); font-size: 16px; }
 .note { color: var(--muted); font-size: 14px; }
 
+/* Emphasized Section Title */
+section.section.section-title.section-title--emph {
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    #000000 0%, /* 黒から開始 */
+    #000000 40%,
+    #2A2A2A 50%,
+    #5C5C5C 60%,
+    #A0A0A0 70%,
+    #D0D0D0 80%,
+    #E6E8EA 90%, /* #EDEEEFに近い色に徐々に */
+    #EDEEEF 100% /* 完全に#EDEEEFに */
+  ) !important;
+  color: #fff !important;
+  padding: 0 0 120px 0 !important;
+  min-height: 250px !important;
+  margin: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.section-title--emph .title-emph {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  letter-spacing: .2px;
+  color: #fff;
+}
+/* Ensure no bottom margin on emphasized section title */
+.section-title--emph h2.section-title.title-emph { margin-bottom: 0 !important; }
+/* Remove default blue underline within emphasized title section */
+.section-title--emph .section-title:after,
+.section-title--emph .title-emph:after { display: none !important; content: none !important; }
+@media (min-width: 960px) {
+  .section-title--emph .title-emph { font-size: 42px; padding: 24px 32px; border-radius: 20px; }
+}
+
 /* Header */
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.8); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--border); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
@@ -67,21 +114,7 @@ a { color: inherit; text-decoration: none; }
   background-repeat: no-repeat;
   z-index: -1; /* Place behind content */
 }
-.hero::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px; /* わずかに重ねて隙間を消す */
-  height: 32px; /* さらに浅くしてFVを最大化 */
-  background: #2c4a77; /* 次セクションの先頭色 */
-  z-index: -1;
-  box-shadow: 0 -6px 24px rgba(0,0,0,0.12); /* 境界の馴染みをわずかに付与 */
-}
-
-@media (max-width: 768px) {
-  .hero::after { height: 24px; }
-}
+/* Removed .hero::after decorative bar */
 .hero-inner {
   display: grid;
   gap: 32px;
@@ -226,21 +259,9 @@ input:focus { outline: 2px solid #bbf7d0; border-color: #86efac; }
   font-weight: 700;
   margin: 0 0 24px;
   text-align: center;
-  color: #1e40af; /* 濃い青系の見出し色 */
+  color: #000000; /* 全て黒い太文字に統一 */
   position: relative;
-  padding-bottom: 16px;
-}
-
-.section-title:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: #3b82f6; /* 青系のアクセント */
-  border-radius: 3px;
+  padding-bottom: 0;
 }
 
 .section-title-section {
@@ -249,13 +270,13 @@ input:focus { outline: 2px solid #bbf7d0; border-color: #86efac; }
 }
 
 /* Belly fat / body fat concerns (pains-fat) */
-.pains-fat { background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%); }
+.pains-fat { background: #EDEEEF; position: relative; padding-top: 10px; }
 .pains-fat-inner { display: grid; gap: 24px; align-items: center; }
 .pains-fat-copy .section-title { text-align: left; }
 .pains-fat .lead { color: #334155; }
 .fat-points { list-style: none; padding: 0; margin: 14px 0 18px; display: grid; gap: 10px; }
 .fat-points li { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); color: #334155; display: flex; align-items: center; gap: 10px; }
-.fat-points li i { color: var(--primary); }
+.fat-points li i { color: #10B981; }
 .fat-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
 .pains-fat-media img { width: 100%; max-width: 520px; border-radius: 16px; box-shadow: 0 16px 40px rgba(2,6,23,0.16); }
 
@@ -265,14 +286,14 @@ input:focus { outline: 2px solid #bbf7d0; border-color: #86efac; }
 }
 
 /* Skin concerns (pains-skin) */
-.pains-skin { background: linear-gradient(180deg, #fff7f8 0%, #ffffff 100%); }
+.pains-skin { background: #D7D8D9; }
 .pains-skin-inner { display: grid; gap: 24px; align-items: center; }
 .pains-skin-media img { width: 100%; max-width: 520px; border-radius: 16px; box-shadow: 0 16px 40px rgba(2,6,23,0.12); }
 .pains-skin-copy .section-title { text-align: left; }
 .pains-skin .lead { color: #334155; }
 .skin-points { list-style: none; padding: 0; margin: 14px 0 12px; display: grid; gap: 10px; }
 .skin-points li { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); color: #334155; display: flex; align-items: center; gap: 10px; }
-.skin-points li i { color: #f97316; } /* orange-500 for skin tone */
+.skin-points li i { color: #10B981; }
 .skin-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
 
 @media (min-width: 960px) {
@@ -281,13 +302,13 @@ input:focus { outline: 2px solid #bbf7d0; border-color: #86efac; }
 }
 
 /* Health checkup concerns (pains-checkup) */
-.pains-checkup { background: linear-gradient(180deg, #f0f8ff 0%, #ffffff 100%); }
+.pains-checkup { background: #EDEFF0; }
 .pains-checkup-inner { display: grid; gap: 24px; align-items: center; }
 .pains-checkup-copy .section-title { text-align: left; }
 .pains-checkup .lead { color: #334155; }
 .checkup-points { list-style: none; padding: 0; margin: 14px 0 18px; display: grid; gap: 10px; }
 .checkup-points li { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); color: #334155; display: flex; align-items: center; gap: 10px; }
-.checkup-points li i { color: #3b82f6; } /* blue-500 for medical tone */
+.checkup-points li i { color: #10B981; }
 .pains-checkup-media img { width: 100%; max-width: 520px; border-radius: 16px; box-shadow: 0 16px 40px rgba(2,6,23,0.12); }
 
 @media (min-width: 960px) {
