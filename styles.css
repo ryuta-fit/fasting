@@ -18,13 +18,14 @@ a { color: inherit; text-decoration: none; }
   --surface: #f8fafc; /* slate-50 */
   --border: #e2e8f0; /* slate-200 */
   --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  --header-h: 64px; /* sticky header height */
 }
 
 /* Layout */
 .container { width: min(1100px, 92%); margin: 0 auto; }
 .section { padding: 64px 0; }
-.section.alt { background: var(--surface); }
-.section-title { font-size: 28px; font-weight: 700; margin: 0 0 24px; }
+.section.alt { background: #f0f4f8; } /* A slightly darker background for alt sections */
+.section-title { font-size: 28px; font-weight: 700; margin: 0 0 24px; text-align: center; }
 .lead { color: var(--muted); font-size: 16px; }
 .note { color: var(--muted); font-size: 14px; }
 
@@ -46,18 +47,61 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Hero */
-.hero { padding: 64px 0; }
-.hero-inner { display: grid; gap: 32px; align-items: center; }
-.hero-copy h1 { font-size: 32px; line-height: 1.2; margin: 0 0 12px; }
-.hero-copy .lead { font-size: 16px; margin-bottom: 20px; }
+.hero {
+  padding: 16px 0 0; /* 上余白を最小化 */
+  position: relative; /* Needed for pseudo-element positioning */
+  min-height: calc(100svh - var(--header-h)); /* アドレスバー考慮のsvhで最大化 */
+  display: block;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('assets/mo.png'); /* Dark overlay */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1; /* Place behind content */
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px; /* わずかに重ねて隙間を消す */
+  height: 32px; /* さらに浅くしてFVを最大化 */
+  background: #2c4a77; /* 次セクションの先頭色 */
+  z-index: -1;
+  box-shadow: 0 -6px 24px rgba(0,0,0,0.12); /* 境界の馴染みをわずかに付与 */
+}
+
+@media (max-width: 768px) {
+  .hero::after { height: 24px; }
+}
+.hero-inner {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+  min-height: inherit; /* ヒーローの高さに追従 */
+  align-content: center; /* 縦方向中央寄せ */
+  position: relative; /* Ensure z-index works */
+  z-index: 1; /* Place above pseudo-element */
+}
+.hero-copy h1 { font-size: 32px; line-height: 65px; margin: 0 0 12px; color: #ffffff; }
+.hero-copy .lead { font-size: 16px; margin-bottom: 20px; color: #ffffff; }
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-.hero-badges { display: flex; gap: 16px; list-style: none; padding: 0; margin: 20px 0 0; color: var(--muted); font-size: 14px; flex-wrap: wrap; }
+.hero-badges { display: flex; gap: 16px; list-style: none; padding: 0; margin: 20px 0 0; color: #ffffff; font-size: 14px; flex-wrap: wrap; }
 .hero-media { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
 
+
 @media (min-width: 960px) {
-  .hero { padding: 88px 0; }
+  .hero { padding: 48px 0 0; }
   .hero-inner { grid-template-columns: 1.1fr 1fr; }
-  .hero-copy h1 { font-size: 44px; }
+  .hero-copy h1 { font-size: 56px; }
   .hero-copy .lead { font-size: 18px; }
 }
 
@@ -125,3 +169,128 @@ input:focus { outline: 2px solid #bbf7d0; border-color: #86efac; }
 
 /* Utilities */
 .hidden { display: none !important; }
+
+/* Pains (悩み訴求) */
+.section.alt.pains, .pains {
+  position: relative;
+  background: linear-gradient(180deg, #2c4a77 0%, #4b5563 100%) !important; /* 強制上書き */
+  color: #ffffff;
+}
+.pains { margin-top: -40px; padding-top: 80px; }
+.section.alt.pains .section-title { color: #ffffff; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+.pains .lead { color: #ffffff; text-align: center; }
+.pains-grid { display: grid; gap: 24px; align-items: start; }
+.pains-right {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  color: #0f172a; /* Ensure text color is readable on white background */
+}
+.section.alt.pains .pains-sub { font-size: 20px; margin: 6px 0 10px; color: #ffffff; }
+.pain-cards { display: grid; gap: 16px; margin: 14px 0 10px; }
+.pain-card {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 14px;
+  padding: 18px 18px 16px 18px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pain-card:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
+.pain-card h3 { margin: 0 0 8px; font-size: 18px; color: #ffffff; font-weight: 700; letter-spacing: .2px; }
+.pain-card h3 i { margin-right: 8px; color: #ffffff; font-size: 1.2em; }
+.pain-card p { margin: 0; color: rgba(255,255,255,0.95); }
+.section.alt.pains .reason-list { list-style: none; padding: 0; margin: 12px 0 16px; display: grid; gap: 10px; }
+.section.alt.pains .reason-list li { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 12px 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); color: rgba(255,255,255,0.9); }
+.section.alt.pains .reason-list strong { color: #ffffff; }
+
+/* Pains responsive columns */
+@media (min-width: 720px) { .pain-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .pain-cards { grid-template-columns: repeat(4, 1fr); } }
+
+/* Section wave separator (bottom of pains) */
+.section-wave {
+  height: 28px;
+  background-repeat: repeat-x;
+  background-size: 600px 28px;
+  background-position: bottom center;
+  /* White wave over next white section */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='28' viewBox='0 0 600 28' preserveAspectRatio='none'><path d='M0,10 C150,30 450,-10 600,10 L600,28 L0,28 Z' fill='%23ffffff' opacity='1'/></svg>");
+}
+
+/* Section Title */
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 24px;
+  text-align: center;
+  color: #1e40af; /* 濃い青系の見出し色 */
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #3b82f6; /* 青系のアクセント */
+  border-radius: 3px;
+}
+
+.section-title-section {
+  padding: 40px 0;
+  background: #f8fafc; /* 薄いグレーの背景 */
+}
+
+/* Belly fat / body fat concerns (pains-fat) */
+.pains-fat { background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%); }
+.pains-fat-inner { display: grid; gap: 24px; align-items: center; }
+.pains-fat-copy .section-title { text-align: left; }
+.pains-fat .lead { color: #334155; }
+.fat-points { list-style: none; padding: 0; margin: 14px 0 18px; display: grid; gap: 10px; }
+.fat-points li { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); color: #334155; display: flex; align-items: center; gap: 10px; }
+.fat-points li i { color: var(--primary); }
+.fat-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.pains-fat-media img { width: 100%; max-width: 520px; border-radius: 16px; box-shadow: 0 16px 40px rgba(2,6,23,0.16); }
+
+@media (min-width: 960px) {
+  .pains-fat-inner { grid-template-columns: 1.1fr 0.9fr; }
+  .pains-fat-copy .section-title { font-size: 32px; }
+}
+
+/* Skin concerns (pains-skin) */
+.pains-skin { background: linear-gradient(180deg, #fff7f8 0%, #ffffff 100%); }
+.pains-skin-inner { display: grid; gap: 24px; align-items: center; }
+.pains-skin-media img { width: 100%; max-width: 520px; border-radius: 16px; box-shadow: 0 16px 40px rgba(2,6,23,0.12); }
+.pains-skin-copy .section-title { text-align: left; }
+.pains-skin .lead { color: #334155; }
+.skin-points { list-style: none; padding: 0; margin: 14px 0 12px; display: grid; gap: 10px; }
+.skin-points li { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); color: #334155; display: flex; align-items: center; gap: 10px; }
+.skin-points li i { color: #f97316; } /* orange-500 for skin tone */
+.skin-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+
+@media (min-width: 960px) {
+  .pains-skin-inner { grid-template-columns: 1fr 1.1fr; }
+  .pains-skin-copy .section-title { font-size: 32px; }
+}
+
+/* Health checkup concerns (pains-checkup) */
+.pains-checkup { background: linear-gradient(180deg, #f0f8ff 0%, #ffffff 100%); }
+.pains-checkup-inner { display: grid; gap: 24px; align-items: center; }
+.pains-checkup-copy .section-title { text-align: left; }
+.pains-checkup .lead { color: #334155; }
+.checkup-points { list-style: none; padding: 0; margin: 14px 0 18px; display: grid; gap: 10px; }
+.checkup-points li { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); color: #334155; display: flex; align-items: center; gap: 10px; }
+.checkup-points li i { color: #3b82f6; } /* blue-500 for medical tone */
+.pains-checkup-media img { width: 100%; max-width: 520px; border-radius: 16px; box-shadow: 0 16px 40px rgba(2,6,23,0.12); }
+
+@media (min-width: 960px) {
+  .pains-checkup-inner { grid-template-columns: 1.1fr 1fr; }
+  .pains-checkup-copy .section-title { font-size: 32px; }
+}
